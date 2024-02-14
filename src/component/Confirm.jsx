@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import "./css/confirm.css";
+import imageSrc from "./images/pics";
 function Confirm() {
   const { id } = useParams();
 
@@ -13,8 +14,8 @@ function Confirm() {
             <div className="d-flex justify-content-center">
               <img
                 className="w-50"
-                src="https://media1.tenor.com/images/22919ad969d4fcf8280c47f4c4d6a643/tenor.gif?itemid=15903843"
-                alt="Card image cap"
+                src={imageSrc.pht6}
+                alt="No Image"
               />
             </div>
             <div className="card-body">
@@ -28,8 +29,8 @@ function Confirm() {
                 doloremque doloribus aliquid illo. Eligendi iusto dolore nobis
                 tempora rerum. Accusamus repellendus natus nostrum!
               </small><br/>
-             <button className="btn btn-success">
-             <NavLink className='nav-link' to={`/home/${id}`}> Go to home</NavLink>
+             <button className="btn btn-success mt-3">
+             <NavLink className='nav-link' to={`/home/${id}`}> Go to Notification</NavLink>
              </button>
             </div>
           </div>

@@ -56,7 +56,7 @@ function Form() {
           <div className="col-12 col-md-6">
             <div className="form-left">
               <img
-                src="https://img.freepik.com/free-vector/profile-interface-concept-illustration_114360-6359.jpg?w=740&t=st=1707903517~exp=1707904117~hmac=a6936d78bb44cd46f5f7a3860e472e778d5c71bb8bc36c32e9c620cd4d13485d"
+                src={imgSrc.pht5}
                 alt=""
                 className="w-100"
               />
@@ -64,7 +64,7 @@ function Form() {
           </div>
           <div className="col-12 col-md-6">
             <div className="form-right p-2 p-md-5">
-              <h2>Patient Form</h2>
+              <h2>Fill Form</h2>
               <form onSubmit={submitHandler} autoComplete="on">
                 <div className="form-group">
                   <label htmlFor="name">Enter your name</label>
@@ -121,6 +121,7 @@ function Form() {
                   <label htmlFor="name">Issue</label>
                   <textarea
                     ref={fissue}
+                    placeholder='Are you fine..?Tell me your problem'
                     className="form-control"
                     name=""
                     id=""
