@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import imgSrc from "./images/pics";
 import "./css/form.css";
 import Confirm from "./Confirm";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 function Form() {
   const [isLoading, setIsLoading] = useState(false);
   // const [token, setToken] = useState(null);
@@ -29,11 +30,14 @@ function Form() {
         .post("/api/user/details", data)
         .then((res) => {
           console.log(res.data.user);
+          toast.success(res.data.msg);
           // setToken(res.data.user.token);
           setIsLoading(false);
           navigate(`/cnf/${res.data.user.token}`);
         })
-        .catch((error) => {});
+        .catch((err) => {
+          toast.error(err.response.data.msg);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -55,11 +59,7 @@ function Form() {
         <div className="row align-items-center">
           <div className="col-12 col-md-6">
             <div className="form-left">
-              <img
-                src={imgSrc.pht5}
-                alt=""
-                className="w-100"
-              />
+              <img src={imgSrc.pht5} alt="" className="w-100" />
             </div>
           </div>
           <div className="col-12 col-md-6">
@@ -114,14 +114,14 @@ function Form() {
                     id="mob"
                     required
                     className="form-control"
-                    placeholder="Enter  mobile number"
+                    placeholder="Enter mobile number"
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="name">Issue</label>
                   <textarea
                     ref={fissue}
-                    placeholder='Are you fine..?Tell me your problem'
+                    placeholder="Are you fine..?Tell me your problem"
                     className="form-control"
                     name=""
                     id=""
@@ -137,7 +137,13 @@ function Form() {
                     Book Appointment
                   </button>
                 </div>
+                <div className="form-footer text-center"></div>
               </form>
+              <button className="btn btn-success w-100 py-3 fs-5 rounded-4">
+                <NavLink className="navbar-brand" to={"/doclogin"}>
+                  If You're a Doctor Login Here
+                </NavLink>
+              </button>
             </div>
           </div>
         </div>

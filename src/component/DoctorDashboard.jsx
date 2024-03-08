@@ -19,20 +19,17 @@ function DoctorDashboard() {
           <div className="collapse navbar-collapse" id="menu">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink to={"#"} className="navbar-brand">
-                  Today Appointments
+                <NavLink to={"/callpatients"} className="navbar-brand">
+                  View Patients
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to={"#"} className="navbar-brand">
-                  Total Patients
+                <NavLink to={"/notifications"} className="navbar-brand">
+                  Notifications
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to={"#"} className="navbar-brand">
-                  Call Patients
-                </NavLink>
-                <NavLink to={"#"} className="navbar-brand">
+                <NavLink to={"/doclogin"} className="navbar-brand">
                   Logout
                 </NavLink>
               </li>

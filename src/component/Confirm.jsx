@@ -24,13 +24,10 @@ function Confirm() {
                 <span className="text-warning">{id}</span>
               </p>
               <small className="card-title lead text-secondary">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Asperiores tenetur placeat veniam ex ullam, assumenda labore
-                doloremque doloribus aliquid illo. Eligendi iusto dolore nobis
-                tempora rerum. Accusamus repellendus natus nostrum!
+                Your token is succesfully generated
               </small><br/>
              <button className="btn btn-success mt-3">
-             <NavLink className='nav-link' to={`/home/${id}`}> Go to Notification</NavLink>
+             <NavLink className='nav-link' to={`/home/${id}`}> Go to my notification</NavLink>
              </button>
             </div>
           </div>

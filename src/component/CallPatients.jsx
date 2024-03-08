@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import axios from "axios";
+import { toast } from "react-toastify";
 const CallPatients = () => {
+  const [users, setUsers] = useState([]);
+  const getCallback = useCallback(() => {
+    const getUsers = async () => {
+      await axios
+        .get("/api/doctor/all")
+        .then((res) => setUsers(res.data.users));
+    };
+    getUsers();
+  }, []);
+  useEffect(() => {
+    getCallback();
+  }, []);
+  const deleteUser = async (id) => {
+    await axios
+      .delete(`/api/doctor/delete/${id}`)
+      .then((res) => toast.success(res.data.msg))
+      .catch((err) => toast.error(err.response.data.msg));
+    window.location.reload();
+  };
   return (
     <div>
       <header>
@@ -18,20 +38,17 @@ const CallPatients = () => {
             <div className="collapse navbar-collapse" id="menu">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <NavLink to={"#"} className="navbar-brand">
-                    Today Appointments
+                  <NavLink to={"/callpatients"} className="navbar-brand">
+                    View Patients
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to={"#"} className="navbar-brand">
-                    Total Patients
+                  <NavLink to={"/notifications"} className="navbar-brand">
+                    Notifications
                   </NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink to={"#"} className="navbar-brand">
-                    Call Patients
-                  </NavLink>
-                  <NavLink to={"#"} className="navbar-brand">
+                  <NavLink to={"/doclogin"} className="navbar-brand">
                     Logout
                   </NavLink>
                 </li>
@@ -42,34 +59,43 @@ const CallPatients = () => {
       </header>
       <div className="container">
         <div className="row">
-          <div className="col col-11 col-lg-4 col-md-6 mt-3">
-            <div className="card">
-              <div className="text-center">
-                <img
-                  className="card-img-top"
-                  src="https://cdn4.iconfinder.com/data/icons/green-shopper/1068/user.png"
-                  alt="Card image cap"
-                />
-              </div>
-              <div className="card-body">
-                <h5 className="card-title">Patient Name:</h5>
-                <p className="card-text">Email:</p>
-                <p className="card-text">Issue:</p>
-              </div>
-              <div className="card-body">
-                <a href="#" className="card-link">
-                  <button className="btn btn-success">
-                    <i className="bi bi-telephone"></i>
-                  </button>
-                </a>
-                <a href="#" className="card-link">
-                  <button className="btn btn-danger">
-                    <i className="bi bi-bell"></i>
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
+          {users &&
+            users.map((item, index) => {
+              return (
+                <div className="col col-12 col-lg-4 col-md-4 my-3" key={index}>
+                  <div className="card">
+                    <div className="text-center">
+                      <img
+                        className="w-25"
+                        src="https://cdn4.iconfinder.com/data/icons/green-shopper/1068/user.png"
+                        alt="Card image cap"
+                      />
+                    </div>
+                    <div className="card-body">
+                      <h5 className="card-title">Patient Name:{item.name}</h5>
+                      <h4>Token:{item.token}</h4>
+                      <p className="card-text">Email:{item.email}</p>
+                      <p className="card-text">Issue:{item.issue}</p>
+                    </div>
+                    <div className="card-body">
+                      <a href={`/view/${item._id}`}>
+                        {" "}
+                        <button className="btn btn-success w-50">
+                          Call patient
+                        </button>
+                      </a>
+                      <button
+                        className="btn btn-warning ml-3 w-50
+"
+                        onClick={() => deleteUser(item._id)}
+                      >
+                        Delete User
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

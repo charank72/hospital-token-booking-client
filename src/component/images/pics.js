@@ -6,6 +6,7 @@ import pht6 from "./tick.gif";
 import pht5 from "./Profile Interface-cuate.svg";
 import pht7 from "./doctor-office-logo-template_23-2149665623.jpg";
 import pht8 from "./bell-done3.gif";
+import pht9 from './20602853_6300958.svg'
 const imageSrc = {
   doctor,
   pht2,
@@ -15,5 +16,6 @@ const imageSrc = {
   pht6,
   pht7,
   pht8,
+  pht9
 };
 export default imageSrc;
